@@ -1,0 +1,153 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "HelloWorldAPI",
+    "description": "A sample API to test the Dancer2::Plugin::Swagger2 Perl module",
+    "termsOfService": "http://github.com/greeneg/dancer2-api-test-app",
+    "contact": {
+      "name": "Dancer2-Plugin-Swagger2-Developers",
+      "email": "greeneg@tolharadys.net",
+      "url": "http://github.com/greeneg/dancer2-api-test-app"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "api.example.com",
+  "basePath": "/api/v1",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "tags": [],
+  "paths": {
+    "/hello": {
+      "get": {
+        "description": "Get a cheery response!",
+        "operationId": "greet",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/helloResponse"
+            }
+          }
+        }
+      }
+    },
+    "/greeting": {
+      "post": {
+        "description": "Set the greeting",
+        "operationId": "set_greeting",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "greeting",
+            "description": "Greeting to respond with",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/greeting"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/greetingResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    }
+  },
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "name": "X-API-Key",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "helloResponse": {
+      "type": "object",
+      "required": [
+        "code",
+        "status",
+        "extendedStatus",
+        "greeting"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "description": "The numeric HTTP status code"
+        },
+        "extendedStatus": {
+          "type": "string",
+          "description": "The extended status message from the service"
+        },
+        "greeting": {
+          "type": "string",
+          "description": "The message to return to the user"
+        },
+        "status": {
+          "type": "string",
+          "description": "The short status message from the service"
+        }
+      }
+    },
+    "greeting": {
+      "type": "object",
+      "required": [
+        "greeting"
+      ],
+      "properties": {
+        "greeting": {
+          "type": "string",
+          "description": "The string to use for greetings"
+        }
+      }
+    },
+    "greetingResponse": {
+      "type": "object",
+      "required": [
+        "code",
+        "status",
+        "extendedStatus"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "description":"The numeric HTTP status code"
+        },
+        "extendedStatus": {
+          "type": "string",
+          "description":"The extended status message from the service"
+        },
+        "status": {
+            "type": "string",
+            "description": "The short status message from the service"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Take a look at more of our documentation",
+    "url": "http://github.com/greeneg/dancer2-api-test-app"
+  }
+}
